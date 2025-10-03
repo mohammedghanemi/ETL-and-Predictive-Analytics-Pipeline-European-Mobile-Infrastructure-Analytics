@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Munich Mobile Infrastructure Dashboard</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #667eea;
+        }
+        .stat-label {
+            color: #666;
+            margin-top: 5px;
+        }
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .chart-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .map-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            height: 600px;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 5px;
+        }
+        .loading {
+            text-align: center;
+            padding: 50px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🏗️ Munich Mobile Infrastructure Analytics</h1>
+        <p>Real-time analysis of cell tower coverage and investment trends</p>
+    </div>
+
+    <div class="stats-container" id="statsContainer">
+        <div class="loading">Loading statistics...</div>
+    </div>
+
+    <div class="dashboard-grid">
+        <div class="chart-container">
+            <h3>📡 Network Type Distribution</h3>
+            <div id="networkChart"></div>
+        </div>
+        
+        <div class="chart-container">
+            <h3>🏢 Operator Market Share</h3>
+            <div id="operatorChart"></div>
+        </div>
+        
+        <div class="chart-container">
+            <h3>📊 Regional Coverage</h3>
+            <div id="regionalChart"></div>
+        </div>
+        
+        <div class="chart-container">
+            <h3>📰 News Sentiment Analysis</h3>
+            <div id="sentimentChart"></div>
+        </div>
+    </div>
+
+    <div class="map-container">
+        <h3>🗺️ Cell Tower Locations - Munich Region</h3>
+        <iframe src="/static/dashboard_map.html"></iframe>
+    </div>
+
+    <script>
+        // Load statistics
+        fetch('/api/coverage-stats')
+            .then(response => response.json())
+            .then(data => {
+                const statsContainer = document.getElementById('statsContainer');
+                statsContainer.innerHTML = `
+                    <div class="stat-card">
+                        <div class="stat-number">${data.total_towers}</div>
+                        <div class="stat-label">Total Cell Towers</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">${data.total_articles}</div>
+                        <div class="stat-label">News Articles</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">${data.avg_signal}dB</div>
+                        <div class="stat-label">Avg Signal Strength</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">${Math.round(data.avg_range)}m</div>
+                        <div class="stat-label">Avg Coverage Range</div>
+                    </div>
+                `;
+                
+                // Create charts
+                createNetworkChart(data.network_types);
+                createOperatorChart(data.operators);
+                createRegionalChart(data.regions);
+                createSentimentChart(data.sentiment_distribution);
+            });
+
+        function createNetworkChart(networkData) {
+            const data = [{
+                values: Object.values(networkData),
+                labels: Object.keys(networkData),
+                type: 'pie',
+                marker: {
+                    colors: ['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728']
+                }
+            }];
+            
+            Plotly.newPlot('networkChart', data, {
+                height: 300,
+                showlegend: true
+            });
+        }
+
+        function createOperatorChart(operatorData) {
+            const data = [{
+                x: Object.values(operatorData),
+                y: Object.keys(operatorData),
+                type: 'bar',
+                orientation: 'h',
+                marker: {
+                    color: ['#e377c2', '#d62728', '#1f77b4']
+                }
+            }];
+            
+            Plotly.newPlot('operatorChart', data, {
+                height: 300,
+                margin: { l: 100 }
+            });
+        }
+
+        function createRegionalChart(regionalData) {
+            const data = [{
+                x: Object.keys(regionalData),
+                y: Object.values(regionalData),
+                type: 'bar',
+                marker: {
+                    color: 'lightgreen'
+                }
+            }];
+            
+            Plotly.newPlot('regionalChart', data, {
+                height: 300
+            });
+        }
+
+        function createSentimentChart(sentimentData) {
+            if (Object.keys(sentimentData).length > 0) {
+                const data = [{
+                    values: Object.values(sentimentData),
+                    labels: Object.keys(sentimentData),
+                    type: 'pie',
+                    marker: {
+                        colors: ['#ff4444', '#888888', '#44ff44']
+                    }
+                }];
+                
+                Plotly.newPlot('sentimentChart', data, {
+                    height: 300
+                });
+            } else {
+                document.getElementById('sentimentChart').innerHTML = '<p>No sentiment data available</p>';
+            }
+        }
+    </script>
+</body>
+</html>
