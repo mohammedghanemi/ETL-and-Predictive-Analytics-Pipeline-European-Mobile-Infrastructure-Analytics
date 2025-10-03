@@ -14,30 +14,30 @@ A comprehensive data engineering platform that collects, processes, analyzes, an
 
 **mobile-infrastructure-analytics/**
   -  📊 DATA PROCESSING LAYER
-  -  01_etl_pipeline.py       # Core ETL Engine: extract, transform, loa mobile network data
-  -  requirements.txt         # Python dependencies
+    -  01_etl_pipeline.py       
+    -  requirements.txt         
 
   -  📈 ANALYTICS & VISUALIZATION LAYER
-    -  02_visualization.py      # Charts, maps, and dashboards
-    -  03_predictive_analytics.py # Coverage gap detection & tower placement predictions
-        -   📁 templates/dashboard.html # Web UI for analytics dashboards
+    -  02_visualization.py      
+    -  03_predictive_analytics.py 
+        -   📁 templates/dashboard.html 
 
   -  🌐 APPLICATION LAYER
-    -  04_web_dashboard.py      # Flask/Dash web interface
-    -  05_monitoring.py         # Real-time monitoring & alert system
-    -   📁 static/                # Static assets for web interface (CSS, JS, images)
+    -  04_web_dashboard.py      
+    -  05_monitoring.py         
+    -   📁 static/                
  
   -  🚀 DEPLOYMENT LAYER
-    -  06_deployment.py         # Deployment scripts
-    -  Dockerfile               # Container configuration
-    -  docker-compose.yml       # Multi-service setup
-    -  deploy.bat               # Windows deployment script
-    -  deploy.sh                # Linux/Mac deployment script
+    -  06_deployment.py         
+    -  Dockerfile               
+    -  docker-compose.yml      
+    -  deploy.bat              
+    -  deploy.sh                
 
   -  💾 DATA STORAGE LAYER
-    -  european_mobile_infrastructure.db # SQLite database
-       -  📁 data/                           # Raw mobile network and news data
-       -  📁 logs/                           # ETL and system logs
+    -  european_mobile_infrastructure.db 
+       -  📁 data/                          
+       -  📁 logs/                           
 
 ---
 
