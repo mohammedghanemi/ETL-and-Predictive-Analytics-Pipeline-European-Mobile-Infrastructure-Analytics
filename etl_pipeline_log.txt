@@ -1,0 +1,39 @@
+=== Munich Mobile Infrastructure ETL Pipeline Log ===
+Focus: Analysis of cell tower coverage and investment news in Munich/Bavaria region
+Started at: 2025-10-03T18:12:43.843370
+
+2025-10-03 18:12:43 : === STARTING ETL PIPELINE ===
+2025-10-03 18:12:43 : Phase 1: Data Extraction
+2025-10-03 18:12:43 : Attempting to extract real cell tower data for Munich...
+2025-10-03 18:12:43 : Starting OpenCelliD data extraction
+2025-10-03 18:12:45 : API returned status 404, using sample data
+2025-10-03 18:12:45 : Generating realistic sample cell tower data for Munich region
+2025-10-03 18:12:45 : Generated 800 sample cell towers for Munich region
+2025-10-03 18:12:45 : Starting investment news extraction
+2025-10-03 18:12:45 : Extracted 5 unique news articles
+2025-10-03 18:12:45 : Starting data exploration
+2025-10-03 18:12:45 : Data exploration complete
+2025-10-03 18:12:45 : Phase 2: Data Transformation
+2025-10-03 18:12:45 : Starting cell tower data cleaning
+2025-10-03 18:12:45 : Converted 'created' to datetime
+2025-10-03 18:12:45 : Added country information for 800 towers
+2025-10-03 18:12:45 : Added region classification based on coordinates
+2025-10-03 18:12:45 : Cleaned data: 800 records (from 800 initially)
+2025-10-03 18:12:45 : Starting news sentiment analysis
+2025-10-03 18:12:45 : Sentiment distribution: {'Neutral': 4, 'Positive': 1, 'Negative': 0}
+2025-10-03 18:12:45 : News sentiment analysis complete
+2025-10-03 18:12:45 : Starting feature normalization
+2025-10-03 18:12:45 : Normalized lat (range: 48.00 to 48.30)
+2025-10-03 18:12:45 : Normalized lon (range: 11.30 to 11.80)
+2025-10-03 18:12:45 : Normalized range (range: 802.00 to 9991.00)
+2025-10-03 18:12:45 : Normalized averageSignal (range: -85.00 to -56.00)
+2025-10-03 18:12:45 : Saved cleaned cell towers to CSV
+2025-10-03 18:12:45 : Saved cleaned news data to CSV
+2025-10-03 18:12:45 : Phase 3: Data Loading
+2025-10-03 18:12:45 : Starting database save operation
+2025-10-03 18:12:45 : Saved 800 cell towers to database
+2025-10-03 18:12:45 : Error saving to database: Error binding parameter 7: type 'list' is not supported
+2025-10-03 18:12:45 : Generating final report
+2025-10-03 18:12:45 : Final report generated: final_etl_report.json
+2025-10-03 18:12:45 : === ETL PIPELINE COMPLETED ===
+2025-10-03 18:12:45 : Pipeline execution finished. Check logs and output files.
