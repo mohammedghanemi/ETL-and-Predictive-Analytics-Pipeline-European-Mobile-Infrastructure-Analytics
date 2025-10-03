@@ -12,32 +12,32 @@ A comprehensive data engineering platform that collects, processes, analyzes, an
 
 ## 📁 PROJECT ARCHITECTURE & FILE STRUCTURE
 
-mobile-infrastructure-analytics/
-├── 📊 DATA PROCESSING LAYER
-│   ├── 01_etl_pipeline.py       # Core ETL Engine: extract, transform, load mobile network data
-│   └── requirements.txt         # Python dependencies
-│
-├── 📈 ANALYTICS & VISUALIZATION LAYER
-│   ├── 02_visualization.py      # Charts, maps, and dashboards
-│   ├── 03_predictive_analytics.py # Coverage gap detection & tower placement predictions
-│   └── 📁 templates/dashboard.html # Web UI for analytics dashboards
-│
-├── 🌐 APPLICATION LAYER
-│   ├── 04_web_dashboard.py      # Flask/Dash web interface
-│   ├── 05_monitoring.py         # Real-time monitoring & alert system
-│   └── 📁 static/                # Static assets for web interface (CSS, JS, images)
-│
-├── 🚀 DEPLOYMENT LAYER
-│   ├── 06_deployment.py         # Deployment scripts
-│   ├── Dockerfile               # Container configuration
-│   ├── docker-compose.yml       # Multi-service setup
-│   ├── deploy.bat               # Windows deployment script
-│   └── deploy.sh                # Linux/Mac deployment script
-│
-└── 💾 DATA STORAGE LAYER
-    ├── european_mobile_infrastructure.db # SQLite database
-    ├── 📁 data/                           # Raw mobile network and news data
-    └── 📁 logs/                           # ETL and system logs
+**mobile-infrastructure-analytics/**
+  -  📊 DATA PROCESSING LAYER
+  -  01_etl_pipeline.py       # Core ETL Engine: extract, transform, loa mobile network data
+  -  requirements.txt         # Python dependencies
+
+  -  📈 ANALYTICS & VISUALIZATION LAYER
+    -  02_visualization.py      # Charts, maps, and dashboards
+    -  03_predictive_analytics.py # Coverage gap detection & tower placement predictions
+        -   📁 templates/dashboard.html # Web UI for analytics dashboards
+
+  -  🌐 APPLICATION LAYER
+    -  04_web_dashboard.py      # Flask/Dash web interface
+    -  05_monitoring.py         # Real-time monitoring & alert system
+    -   📁 static/                # Static assets for web interface (CSS, JS, images)
+ 
+  -  🚀 DEPLOYMENT LAYER
+    -  06_deployment.py         # Deployment scripts
+    -  Dockerfile               # Container configuration
+    -  docker-compose.yml       # Multi-service setup
+    -  deploy.bat               # Windows deployment script
+    -  deploy.sh                # Linux/Mac deployment script
+
+  -  💾 DATA STORAGE LAYER
+    -  european_mobile_infrastructure.db # SQLite database
+       -  📁 data/                           # Raw mobile network and news data
+       -  📁 logs/                           # ETL and system logs
 
 ---
 
