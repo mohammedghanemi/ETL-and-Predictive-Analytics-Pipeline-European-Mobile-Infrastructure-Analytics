@@ -446,6 +446,25 @@ def normalize_features(df):
     
     return df
 
+def fix_news_dataframe(df_news):
+    
+    log_progress("Fixing news dataframe for database compatibility")
+    
+    if df_news is None or len(df_news) == 0:
+        return df_news
+    
+    df_fixed = df_news.copy()
+    
+    # تحويل كل الـlists لـstrings
+    for column in df_fixed.columns:
+        if df_fixed[column].apply(lambda x: isinstance(x, list)).any():
+            df_fixed[column] = df_fixed[column].apply(
+                lambda x: ', '.join(map(str, x)) if isinstance(x, list) else x
+            )
+            log_progress(f"Fixed '{column}' column - converted list to string")
+    
+    return df_fixed
+
 def save_to_database(df_cells, df_news, db_name='european_mobile_infrastructure.db'):
     """
     Save cleaned data to SQLite database
@@ -462,7 +481,9 @@ def save_to_database(df_cells, df_news, db_name='european_mobile_infrastructure.
         
         # Save news data
         if df_news is not None and len(df_news) > 0:
-            df_news.to_sql('investment_news', conn, if_exists='replace', index=False)
+            #df_news.to_sql('investment_news', conn, if_exists='replace', index=False)
+            df_news_fixed = fix_news_dataframe(df_news)
+            df_news_fixed.to_sql('investment_news', conn, if_exists='replace', index=False)
             log_progress(f"Saved {len(df_news)} news articles to database")
         
         # Create additional tables for analysis

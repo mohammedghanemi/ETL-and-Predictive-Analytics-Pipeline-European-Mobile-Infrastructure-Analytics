@@ -1,25 +1,25 @@
 {
-  "generated_date": "2025-10-03T18:12:45.951828",
+  "generated_date": "2025-10-08T17:01:28.648479",
   "project_focus": "Munich and Bavaria Mobile Infrastructure Analysis",
   "data_extraction": {
     "cell_towers": {
       "total_count": 800,
       "countries_covered": 1,
       "network_types": {
-        "4G": 392,
-        "3G": 169,
-        "5G": 155,
-        "2G": 84
+        "4G": 404,
+        "3G": 164,
+        "5G": 146,
+        "2G": 86
       },
       "operators": {
-        "Telekom": 273,
-        "Vodafone": 268,
-        "O2": 259
+        "O2": 278,
+        "Telekom": 274,
+        "Vodafone": 248
       },
       "regions": {
-        "Munich City Center": 415,
-        "Bavaria Region": 225,
-        "Munich Metropolitan": 160
+        "Munich City Center": 427,
+        "Bavaria Region": 196,
+        "Munich Metropolitan": 177
       }
     },
     "news_articles": {
@@ -46,8 +46,8 @@
   "quality_metrics": {},
   "key_insights": {
     "munich_coverage": {
-      "city_center_towers": 415,
-      "avg_range_city_center": 1610.2289156626507,
+      "city_center_towers": 427,
+      "avg_range_city_center": 1701.6533957845434,
       "primary_network_city": "4G"
     }
   }

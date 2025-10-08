@@ -5,7 +5,7 @@ import pandas as pd
 import sqlite3
 from datetime import datetime
 import smtplib
-from email.mime.text import MimeText
+from email.mime.text import MIMEText
 import logging
 
 def log_progress(message):
@@ -65,7 +65,7 @@ def send_email_alert(alerts):
     body = "\n".join(alerts)
     
     try:
-        message = MimeText(body)
+        message = MIMEText(body)
         message["Subject"] = subject
         message["From"] = sender_email
         message["To"] = receiver_email
